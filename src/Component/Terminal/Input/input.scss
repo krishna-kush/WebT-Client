@@ -1,0 +1,16 @@
+.no-design {
+    border: none; /* Remove the border */
+    outline: none; /* Remove the outline on focus */
+    background: none; /* Remove background color */
+    padding: 0; /* Remove any padding */
+    margin: 0; /* Remove any margin */
+    font-family: inherit; /* Use the parent font-family */
+    font-size: inherit; /* Use the parent font-size */
+    color: inherit; /* Use the parent text color */
+
+    // background-color: rgba(211, 254, 0, 0.033);
+}
+
+.input {
+    flex-grow: 1;
+}

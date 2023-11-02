@@ -1,0 +1,31 @@
+.terminal-comp {
+    padding: 1rem;
+
+    width: 100%;
+    height: 50vh;
+    
+    // background-color: rgb(146, 96, 32);
+    
+    border-radius: 0.5rem;
+    
+    border: 2px solid rgb(215, 153, 33);
+    
+    box-sizing: border-box; // to maintain size even after padding and all...
+}
+
+.terminal {
+    width: 100%;
+    height: 100%;
+    
+    overflow-y: auto;
+}
+
+.input-lane {
+    display: inline;
+}
+
+.input-cont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
