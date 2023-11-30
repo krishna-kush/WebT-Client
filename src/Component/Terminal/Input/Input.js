@@ -19,6 +19,7 @@ const Input = forwardRef((params, ref) => {
   }
 
   useEffect(() => {
+    console.log(params.config);
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -26,7 +27,7 @@ const Input = forwardRef((params, ref) => {
 
   return (<>
     <input ref={inputRef} className='input no-design' onChange={(e) => {
-    setInput(e.target.value);
+      setInput(e.target.value);
     }}
     onKeyDown={(e) => {
     if (e.key === 'Enter') {
@@ -35,7 +36,7 @@ const Input = forwardRef((params, ref) => {
         params.UpdateLog(undefined, {cmd: ''}) // so it won't show loading but move to next line(the Message box)
         return
       } else { 
-        if (e.target.value.trim() === 'execute' || !params.showInput) {
+        if ( !params.showInput || !params.config.allowed.length || params.config.allowed.includes(e.target.value.trim()) ){
           if (params.init) {
             console.log('update log from input init');
             params.UpdateLog(undefined, {cmd: e.target.value, output: 'wait'})

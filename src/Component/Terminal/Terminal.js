@@ -15,6 +15,7 @@ b = input('how old are you? ')
 print('you are', b, 'years old')
 c = input('how old are you? 2 ')
 print('goodbye', c, a)`,
+
     ext: 'py',
   });
 
@@ -49,9 +50,9 @@ print('goodbye', c, a)`,
   
   const id = <>
     <div style={{display: "inline"}}>
-      <span style={{ color: 'rgb(215, 153, 33)' }}>guest</span>
+      <span style={{ color: 'rgb(215, 153, 33)' }}>{params.user}</span>
       <span style={{ color: 'rgb(168, 153, 132)' }}>@</span>
-      <span style={{ color: 'rgb(152, 151, 26)' }}>codeBuddySync.com</span>
+      <span style={{ color: 'rgb(152, 151, 26)' }}>{params.host}</span>
       <span style={{ color: 'rgb(168, 153, 132)', marginRight: '0.5rem' }}>:~ $ </span>
     </div>
   </>
@@ -249,11 +250,11 @@ print('goodbye', c, a)`,
       ?
       <div className='input-cont'>
         <p className='input-lane'>{id}</p>
-        <Input ref={inputRef} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current}/>
+        <Input ref={inputRef} config={params.config} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current}/>
       </div>
       :
       <div className='input-cont'>
-        <Input ref={inputRef} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current}/>
+        <Input ref={inputRef} config={params.config} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current}/>
       </div>
     }
     </div>
