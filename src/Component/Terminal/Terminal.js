@@ -74,7 +74,7 @@ print('goodbye', c, a)`,
 
     // console.log('in update options', options);
     if (current) { // in the current msg(last msg in log)
-      console.log('in update if', logRef.current, options);
+      // console.log('in update if', logRef.current, options);
       const updatedHistory = logRef.current.map((item, index) => {
         // index === logRef.current.length - 1
         //   ? item.output === 'wait' // if first message, this wait need to be a unique key message
@@ -226,6 +226,11 @@ print('goodbye', c, a)`,
     }
   }, [cmdCount]);
 
+  // Updating inputRef.current.trackCurrHistory in sync with cmdCount, for when pressed up/down arrow key, we know where to move in history
+  useEffect(() => {
+    inputRef.current.updateTrackCurrHistory(cmdCount);
+  }, [cmdCount])
+
   const focusInput = () => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -246,15 +251,20 @@ print('goodbye', c, a)`,
         </>)
       })}
 
+      {/* 
+      ISSUE: With re-rendering of input every time a command is executed.
+      Now I've inplemented change history in input box, with it, it have become quite heavy component relatively. So with every re-render it'll slow app down, without any need.
+      Need to stop re-rendering of input box, with every command execution. If the command execution is not going into input msg dialouge, then it should not re-render. And when it is going into input msg dialouge, it should not render with change history feature.
+      */}
       {showInput
       ?
       <div className='input-cont'>
         <p className='input-lane'>{id}</p>
-        <Input ref={inputRef} config={params.config} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current}/>
+        <Input ref={inputRef} config={params.config} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current} history={logRef}/>
       </div>
       :
       <div className='input-cont'>
-        <Input ref={inputRef} config={params.config} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current}/>
+        <Input ref={inputRef} config={params.config} cmdCount={cmdCount} setCmdCount={setCmdCount} UpdateLog={UpdateLog} showInput={showInput} init={init.current} history={logRef}/>
       </div>
     }
     </div>
