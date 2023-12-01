@@ -83,7 +83,17 @@ const Input = forwardRef((params, ref) => {
         params.UpdateLog(undefined, {cmd: ''}) // so it won't show loading but move to next line(the Message box)
         return
       } else { 
-        if ( !params.showInput || !params.config.allowed.length || params.config.allowed.includes(e.target.value.trim()) ){
+        if (
+        !params.showInput
+        // || !(params.config.allowed.length || params.config.exempted.length) // if both allowed and exempted are empty, then allow all commands
+        || (!params.config.allowed.length && !params.config.exempted.length) // if both allowed and exempted are empty, then allow all commands. This will also be faster than the above one, as it won't check for all of the elements in the array because it don't have or operator, even if the above one have less operators, it will still be slower than this one.
+        ||
+        (
+          // need a check to know if the other component is empty or not, as allowed and exempted are contradictory to each other
+          ( params.config.allowed.length === 0 && !params.config.exempted.includes(e.target.value.trim()) )
+          ||
+          ( params.config.exempted.length === 0 && params.config.allowed.includes(e.target.value.trim()) )
+        )){
           if (params.init) {
             console.log('update log from input init');
             params.UpdateLog(undefined, {cmd: e.target.value, output: 'wait'})

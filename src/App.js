@@ -9,8 +9,10 @@ const options = {
 }
 
 const config = {
+
+  // should only put elements in one of the options, not both, from allowed and exempted. Put a check for that.
   allowed: [],
-  // exempted: ['execute'],
+  exempted: ['execute'],
 }
 
 const App = () => {
