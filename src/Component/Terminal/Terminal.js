@@ -158,7 +158,8 @@ print('goodbye', c, a)`,
   // Socket Connection
   useEffect(() => {
     if (process.env.REACT_APP_PRODUCTION || state.current) {
-      console.log(`${process.env.REACT_APP_SERVER_URL? 'wss://'+process.env.REACT_APP_SERVER_URL:'ws://localhost:'+process.env.REACT_APP_SERVER_PORT}/terminal`);
+      state.current = true; // to fix the problem caused by using production var, fix it later
+
       const socket = new WebSocket(`${process.env.REACT_APP_SERVER_URL? 'wss://'+process.env.REACT_APP_SERVER_URL:'ws://localhost:'+process.env.REACT_APP_SERVER_PORT}/terminal`);
       socketRef.current = socket;
 
