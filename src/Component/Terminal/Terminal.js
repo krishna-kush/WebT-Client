@@ -158,7 +158,8 @@ print('goodbye', c, a)`,
   // Socket Connection
   useEffect(() => {
     if (state.current) {
-      const socket = new WebSocket(`ws://localhost:${process.env.REACT_APP_SERVER_PORT}/terminal`);
+      console.log(`${process.env.REACT_APP_SERVER_URL? 'wss://'+process.env.REACT_APP_SERVER_URL:'ws://localhost:'+process.env.REACT_APP_SERVER_PORT}/terminal`);
+      const socket = new WebSocket(`${process.env.REACT_APP_SERVER_URL? 'wss://'+process.env.REACT_APP_SERVER_URL:'ws://localhost:'+process.env.REACT_APP_SERVER_PORT}/terminal`);
       socketRef.current = socket;
 
   
